@@ -34,7 +34,8 @@ def get_pin_odds(driver_path):
 
     # Set webdriver options
     driver_options = Options()
-    #driver_options.add_argument("--headless")
+    driver_options.add_argument("--headless")
+    driver_options.add_argument('log-level=3')
 
     # Set up webdriver
     driver = webdriver.Chrome(service=Service(driver_path), options=driver_options)
@@ -101,3 +102,6 @@ def get_pin_odds(driver_path):
     driver.quit()
 
     return games
+
+if __name__ == '__main__':
+    print(get_pin_odds(None))
