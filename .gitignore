@@ -1,2 +1,3 @@
 /venv
 .wdm
+__pycache__
