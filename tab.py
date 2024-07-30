@@ -26,8 +26,10 @@ def get_tab_odds(driver_path):
 
     # Set webdriver options
     driver_options = Options()
-    #driver_options.add_argument("--headless") tab blocks headless mode
+    driver_options.add_argument("--headless") #tab blocks headless mode
     driver_options.add_argument('log-level=3')
+    driver_options.add_argument('--dns-prefetch-disable')
+    driver_options.add_argument('--host-resolver-rules=MAP aa.online-metrix.net 0.0.0.0')
 
     # Set up webdriver
     driver = webdriver.Chrome(service=Service(driver_path), options=driver_options)
