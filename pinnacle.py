@@ -58,7 +58,7 @@ def get_pin_odds(driver_path):
         
         # Else it either contains the game information or market label (1 x 2, handicap, O/U etc.)
         else:
-            game_odds = {}
+            game_details = {}
 
             # Iterate through columns of row to extract 
             columns = row.find_elements(By.XPATH, "./*")
@@ -67,12 +67,12 @@ def get_pin_odds(driver_path):
                 if "metadata" in col.get_attribute('class'):
                     # Add team names to dict
                     game_info = col.find_elements(By.TAG_NAME, 'span')
-                    game_odds['team1'] = game_info[0].text.split('(')[0].strip()
-                    game_odds['team2'] = game_info[1].text.split('(')[0].strip()
+                    game_details['team1'] = game_info[0].text.split('(')[0].strip()
+                    game_details['team2'] = game_info[1].text.split('(')[0].strip()
 
                     # Add time to game_datetime datetime object and add to dict
                     hrs, mins = map(int, game_info[2].text.split(':'))
-                    game_odds['datetime'] = game_datetime.replace(hour=hrs, minute=mins)
+                    game_details['datetime'] = game_datetime.replace(hour=hrs, minute=mins)
                 
                 # Else if it contains moneyline odds
                 elif "moneyline" in col.get_attribute('class'):
@@ -85,17 +85,17 @@ def get_pin_odds(driver_path):
 
                     # Add win-draw-win odds to dict
                     if len(odds) > 2:
-                        game_odds['team1_odds'] = odds[0].text
-                        game_odds['draw'] = odds[1].text
-                        game_odds['team2_odds'] = odds[2].text
+                        game_details['team1_odds'] = odds[0].text
+                        game_details['draw'] = odds[1].text
+                        game_details['team2_odds'] = odds[2].text
 
                     # Or add win-win odds to dict
                     else:
-                        game_odds['team1_odds'] = odds[0].text
-                        game_odds['team2_odds'] = odds[1].text
+                        game_details['team1_odds'] = odds[0].text
+                        game_details['team2_odds'] = odds[1].text
 
                     # Append dict to list
-                    games.append(game_odds)
+                    games.append(game_details)
 
                     break # Move to next row as we only want moneyline odds
                     
