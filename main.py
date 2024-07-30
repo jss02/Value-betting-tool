@@ -3,13 +3,25 @@ from webdriver_manager.chrome import ChromeDriverManager
 from pinnacle import get_pin_odds
 from tab import get_tab_odds
 
+# Helper function to calcalute true odds of an event via assuming margin Weights proportional to odds
+def true_odds(team1, team2, draw=None):
+    ret = {}
+    if not draw:
+        margin = (1/team1 + 1/team2) - 1
+        return {'team1': (2*team1) / (2-margin*team1), 'team2': (2*team2) / (2-margin*team2)}
+    else:
+        margin = (1/t1 + 1/draw + 1/t2) - 1
+        return {'team1' : (3*team1) / (3 - margin*team1), 'draw': (3*draw) / (3 - margin*draw), 'team2': (3*team2) / (3 - margin*team2)}
+
+
 def main():
     # Install chrome driver in current directory
     os.environ['WDM_LOCAL'] = '1'
     driver_path = ChromeDriverManager().install()
 
-    #get_pin_odds(driver_path)
-    print(get_tab_odds(driver_path))
+    get_pin_odds(driver_path)
+    get_tab_odds(driver_path)
+
 
 if __name__ == '__main__':
     main() 
