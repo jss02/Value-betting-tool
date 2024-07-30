@@ -20,6 +20,8 @@ def format_date(date):
         return datetime.strptime(date.find_element(By.TAG_NAME, 'span').text.split(', ', 1)[1], '%b %d, %Y')
 
 """
+get_pin_odds(driver_path)
+
 Scrapes the game time, odds, and team names from pinnacle.com and returns it as a list of game dictionaries
 
 Params:
