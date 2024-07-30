@@ -10,7 +10,7 @@ def true_odds(team1, team2, draw=None):
         margin = (1/team1 + 1/team2) - 1
         return {'team1': (2*team1) / (2-margin*team1), 'team2': (2*team2) / (2-margin*team2)}
     else:
-        margin = (1/t1 + 1/draw + 1/t2) - 1
+        margin = (1/team1 + 1/draw + 1/team2) - 1
         return {'team1' : (3*team1) / (3 - margin*team1), 'draw': (3*draw) / (3 - margin*draw), 'team2': (3*team2) / (3 - margin*team2)}
 
 
