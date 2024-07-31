@@ -1,0 +1,75 @@
+from datetime import timedelta
+from fuzzywuzzy import fuzz
+
+# Helper function to determine if odds have value
+def calc_value(odds, true_odds):
+    if odds > true_odds:
+        return odds/true_odds - 1
+    return False
+
+# Helper function that returns false if the datetime objects of the games are more than 10 minutes apart
+def match_datetimes(game1, game2):
+    if abs((game1['datetime'] - game2['datetime']).total_seconds()) / 60 > 10:
+        return False
+    return True
+
+# Function that checks both teams are the same in both games
+# Returns 1 if team1 key in both dict are the same teams, 2 otherwise
+def match_teams(game1, game2):
+    if (fuzz.token_set_ratio(game1['team1'], game2['team1']) > 90 and
+        fuzz.token_set_ratio(game1['team2'], game2['team2']) > 90):
+        return 1
+    if (fuzz.token_set_ratio(game1['team1'], game2['team2']) > 90 and
+        fuzz.token_set_ratio(game1['team2'], game2['team1']) > 90):
+        return 2
+
+    return False
+    
+
+def get_pos_ev(pin, book2):
+    ret = []
+
+    # Reverse book2 list as popping is more efficient that remove method
+    book2.reverse()
+    last = len(book2) - 1 # Keep track of last index
+
+    # Iterate through list of pinnacle games and try to match with other bookmaker events
+    for game in pin:
+        # Iterate in reverse order
+        for i in range(last, -1, -1):
+            game2 = book2[i]
+
+            # Stop iterating if the datetime doesn't match within 10 minutes
+            if not match_datetimes(game, game2):
+                break
+            
+            # Check if teams match in both games
+            match_key = match_teams(game, game2)
+            if match_key:
+                # Check value for team1 and team2 odds
+                for i in [1, 2]:
+                    value = calc_value(game[f"team{i}"], game2[f"team{match_key}"])
+                    match_key = 2 if match_key == 1 else 1 # Change match_key accordingly for bookmaker2 
+                    
+                    # Add to return list if value is positive
+                    if value:
+                        game['value'] = value
+                        ret.append(game2)
+                
+                # Check if draw outcome is available
+                if 'draw' in game:
+                    value = calc_value(game["draw"], game2["draw"]) 
+
+                    # Add to return list if value is positive
+                    if value:
+                        game['value'] = value
+                        ret.append(value)
+
+                # Remove event from bookmaker2 list
+                book2.pop(i)
+                last -= 1
+
+                # Event is matched so break to next pinnacle event
+                break
+    
+    return ret
