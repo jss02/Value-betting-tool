@@ -21,6 +21,8 @@ Params:
 
 Returns:
     list: list of dictionary containing game information
+    - games are sorted in order of game time since they are scraped in the order displayed by the website
+      which is already sorted
 """
 def get_tab_odds(driver_path):
 
@@ -73,7 +75,7 @@ def get_tab_odds(driver_path):
                 continue
             
             # Add odd to list of odds if it isn't the Line odds
-            odds.append(col.find_element(By.CLASS_NAME, "animate-odd").text)
+            odds.append(float(col.find_element(By.CLASS_NAME, "animate-odd").text))
 
         # Skip if there isn't more than one odd
         if len(odds) < 2: 

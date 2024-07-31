@@ -29,6 +29,8 @@ Params:
 
 Returns:
     list: list of dictionary containing game information
+    - games are sorted in order of game time since they are scraped in the order displayed by the website
+      which is already sorted
 """
 def get_pin_odds(driver_path):
 
@@ -48,7 +50,7 @@ def get_pin_odds(driver_path):
 
     # list for storing games and their information
     games = []
-
+    driver.get_screenshot_as_file("screenshot.png")
     # Get all rows of events and iterate through them
     rows = events.find_elements(By.XPATH, "./*")
     for row in rows:
@@ -85,14 +87,14 @@ def get_pin_odds(driver_path):
 
                     # Add win-draw-win odds to dict
                     if len(odds) > 2:
-                        game_details['team1_odds'] = odds[0].text
-                        game_details['draw'] = odds[1].text
-                        game_details['team2_odds'] = odds[2].text
+                        game_details['team1_odds'] = float(odds[0].text)
+                        game_details['draw'] = float(odds[1].text)
+                        game_details['team2_odds'] = float(odds[2].text)
 
                     # Or add win-win odds to dict
                     else:
-                        game_details['team1_odds'] = odds[0].text
-                        game_details['team2_odds'] = odds[1].text
+                        game_details['team1_odds'] = float(odds[0].text)
+                        game_details['team2_odds'] = float(odds[1].text)
 
                     # Append dict to list
                     games.append(game_details)
