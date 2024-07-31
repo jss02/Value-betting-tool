@@ -14,6 +14,6 @@ def convert_odds(games):
             game['team1_odds'], game['team2_odds'] = true_odds(game['team1_odds'], game['team2_odds']).values()
         else:
             game['team1_odds'], game['draw'], game['team2_odds'] = \
-            true_odds(game['team1_odds'], game['draw'], game['team2_odds']).values()
+            true_odds(game['team1_odds'], game['team2_odds'], game['draw']).values()
 
     return games
