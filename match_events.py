@@ -7,11 +7,9 @@ def calc_value(odds, true_odds):
         return odds/true_odds - 1
     return False
 
-# Helper function that returns false if the datetime objects of the games are more than 10 minutes apart
+# Helper function that returns false if game 2 is more than 10 minutes after game 1
 def match_datetimes(game1, game2):
-    if abs((game1['datetime'] - game2['datetime']).total_seconds()) / 60 > 10:
-        return False
-    return True
+    return game1 + timedelta(minutes=10) - game2 > timedelta()
 
 # Function that checks both teams are the same in both games
 # Returns 1 if team1 key in both dict are the same teams, 2 otherwise
@@ -29,7 +27,7 @@ def match_teams(game1, game2):
 def get_pos_ev(pin, book2):
     ret = []
 
-    # Reverse book2 list as popping is more efficient that remove method
+    # Reverse book2 list as popping is more efficient than remove method
     book2.reverse()
     last = len(book2) - 1 # Keep track of last index
 
@@ -40,7 +38,7 @@ def get_pos_ev(pin, book2):
             game2 = book2[i]
 
             # Stop iterating if the datetime doesn't match within 10 minutes
-            if not match_datetimes(game, game2):
+            if not match_datetimes(game['datetime'], game2['datetime']):
                 break
             
             # Check if teams match in both games
