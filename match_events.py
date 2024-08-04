@@ -46,22 +46,20 @@ def get_pos_ev(pin, book2):
             if match_key:
                 # Check value for team1 and team2 odds
                 for i in [1, 2]:
-                    value = calc_value(game[f"team{i}"], game2[f"team{match_key}"])
+                    value = calc_value(game2[f"team{match_key}_odds"], game[f"team{i}_odds"])
                     match_key = 2 if match_key == 1 else 1 # Change match_key accordingly for bookmaker2 
                     
                     # Add to return list if value is positive
                     if value:
-                        game['value'] = value
-                        ret.append(game2)
+                        ret.append({'name': game2['name'], 'outcome': game[f"team{i}"], 'odds': game2[f"team{match_key}_odds"], 'value': value})
                 
                 # Check if draw outcome is available
                 if 'draw' in game:
-                    value = calc_value(game["draw"], game2["draw"]) 
+                    value = calc_value(game2["draw"], game["draw"]) 
 
                     # Add to return list if value is positive
                     if value:
-                        game['value'] = value
-                        ret.append(value)
+                        ret.append({'name': game2['name'], 'outcome': 'draw', 'odds': game2['draw'], 'value': value})
 
                 # Remove event from bookmaker2 list
                 book2.pop(i)
