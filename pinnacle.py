@@ -50,7 +50,9 @@ def get_pin_odds(driver_path):
 
     # list for storing games and their information
     games = []
-    driver.get_screenshot_as_file("screenshot.png")
+    
+    driver.get_screenshot_as_file("pin.png") # Take screenshot of current page for debugging
+
     # Get all rows of events and iterate through them
     rows = events.find_elements(By.XPATH, "./*")
     for row in rows:

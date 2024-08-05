@@ -9,7 +9,7 @@ from selenium.common.exceptions import NoSuchElementException
 from datetime import datetime, timedelta, time
 
 # Temporary link
-web = 'https://www.tab.com.au/sports/betting/AFL%20Football'
+web = 'https://www.tab.com.au/sports/betting/Soccer/competitions/English%20Premier%20League'
 
 """
 get_tab_odds(driver_path)
@@ -40,8 +40,9 @@ def get_tab_odds(driver_path):
     # list for storing games and their information
     games = []
 
+    driver.get_screenshot_as_file("tab.png") # Take screenshot of current page for debugging
+
     # Get all events and iterate through them
-    driver.get_screenshot_as_file("screenshot.png")
     events = WebDriverWait(driver, 7).until(EC.presence_of_element_located((By.CLASS_NAME, "customised-template")))
     for row in events.find_elements(By.XPATH, "./*"):
         # If game is live, skip
