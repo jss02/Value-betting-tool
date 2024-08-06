@@ -28,7 +28,7 @@ def get_sb_odds(driver_path):
 
     # Set webdriver options
     driver_options = Options()
-    # driver_options.add_argument("--headless")
+    driver_options.add_argument("--headless")
     driver_options.add_argument('log-level=3')
 
     # Set up webdriver
@@ -53,7 +53,7 @@ def get_sb_odds(driver_path):
         gametime_list = event.find_elements(By.TAG_NAME, 'time')
         if gametime_list:
             # Although time is given in ISO 8601 format, there is a known python3.10 bug that gives format error
-            # when fractional seconds are given in 4 decimals, so we must regex and then convert
+            # when fractional seconds are given in 4 decimals, so we must regex and then convert to datetime
             match = re.search(r'(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})', gametime_list[0].get_attribute('datetime')).group(1)
             gametime = datetime.strptime(match, '%Y-%m-%dT%H:%M:%S')
         else:
@@ -75,22 +75,34 @@ def get_sb_odds(driver_path):
                 # Note that the first <span> collected is a container with no text
                 texts = outcome.find_elements(By.TAG_NAME, 'span')
 
-                # If there is 3 outcomes (draw), then set appropriate changes
+                # Add team and odds to game dict
                 if i == 2:
+                    # If 3 outcomes are present, create a 'draw' key value pair and swap previous key value with current
+                    # since previous iteration would've been the draw outcome
                     game_details[f"team{i}"] = texts[1].text
                     game_details[f"team{i}_odds"], game_details['draw'] = float(texts[2].text), game_details[f"team{i}_odds"]
                 else:
                     game_details[f"team{i+1}"] = texts[1].text
                     game_details[f"team{i+1}_odds"] = float(texts[2].text)
         else:
+        # Scraping for multi market containers
+            # Add team names to dict
             game_details['team1'] = event.find_element(By.CSS_SELECTOR, '[data-automation-id="participant-one"]').text
             game_details['team2'] = event.find_element(By.CSS_SELECTOR, '[data-automation-id="participant-two"]').text
+            
+            # Get grid of markets and iterate through them
             market_grid = event.find_element(By.CLASS_NAME, 'market-coupon-grid')
+            found = False # Boolean to check if desired market is present
             for market in market_grid.find_elements(By.XPATH, "./*"):
+                # If current market is Head to head, Match betting, or Money line then add to dict and break
                 if market.find_element(By.CSS_SELECTOR, '[data-automation-id="market-coupon-label"]').text in market_names:
                     odds = market.find_elements(By.CSS_SELECTOR, '[data-automation-id="price-text"]')
                     game_details['team1_odds'], game_details['team2_odds'] = odds[0].text, odds[1].text
                     break
+            
+            # If desired market wasn't found. then don't add to return list and continue
+            if not found:
+                continue
         
         games.append(game_details)
 
