@@ -5,12 +5,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException
 from datetime import datetime
 import re
 
 # Temp link
-web = 'https://www.sportsbet.com.au/betting/soccer/united-kingdom/english-premier-league'
+web = 'https://www.sportsbet.com.au/betting/australian-rules/afl'
 
 """
 get_sb_odds(driver_path)
@@ -40,6 +39,9 @@ def get_sb_odds(driver_path):
 
     # list for storing games and their information
     games = []
+
+    # List of markets that we want to scrape
+    market_names = ["Head to Head", "Match Betting", "Money Line"]
 
     driver.get_screenshot_as_file("sb.png") # Take screenshot of current page for debugging
 
@@ -81,7 +83,14 @@ def get_sb_odds(driver_path):
                     game_details[f"team{i+1}"] = texts[1].text
                     game_details[f"team{i+1}_odds"] = float(texts[2].text)
         else:
-            pass
+            game_details['team1'] = event.find_element(By.CSS_SELECTOR, '[data-automation-id="participant-one"]').text
+            game_details['team2'] = event.find_element(By.CSS_SELECTOR, '[data-automation-id="participant-two"]').text
+            market_grid = event.find_element(By.CLASS_NAME, 'market-coupon-grid')
+            for market in market_grid.find_elements(By.XPATH, "./*"):
+                if market.find_element(By.CSS_SELECTOR, '[data-automation-id="market-coupon-label"]').text in market_names:
+                    odds = market.find_elements(By.CSS_SELECTOR, '[data-automation-id="price-text"]')
+                    game_details['team1_odds'], game_details['team2_odds'] = odds[0].text, odds[1].text
+                    break
         
         games.append(game_details)
 
