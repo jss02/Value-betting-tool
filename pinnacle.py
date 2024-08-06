@@ -28,8 +28,8 @@ Params:
     driver_path (str): relative path of chromedriver.
 
 Returns:
-    list: list of dictionary containing game information
-    - games are sorted in order of game time since they are scraped in the order displayed by the website
+    List[Dict]: list of dictionary containing game information
+    - sorted in order of game time since they are scraped in the order displayed by the website
       which is already sorted
 """
 def get_pin_odds(driver_path):

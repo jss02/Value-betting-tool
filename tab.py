@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
-from datetime import datetime, timedelta, time
+from datetime import datetime
 
 # Temporary link
 web = 'https://www.tab.com.au/sports/betting/Soccer/competitions/English%20Premier%20League'
@@ -20,15 +20,15 @@ Params:
     driver_path (str): relative path of chromedriver.
 
 Returns:
-    list: list of dictionary containing game information
-    - games are sorted in order of game time since they are scraped in the order displayed by the website
+    List[Dict]: list of dictionary containing game information
+    - sorted in order of game time since they are scraped in the order displayed by the website
       which is already sorted
 """
 def get_tab_odds(driver_path):
 
     # Set webdriver options
     driver_options = Options()
-    # driver_options.add_argument("--headless") tab blocks headless mode
+    # driver_options.add_argument("--headless") #tab blocks headless mode
     driver_options.add_argument('log-level=3')
 
     # Set up webdriver

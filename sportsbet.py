@@ -20,8 +20,8 @@ Params:
     driver_path (str): relative path of chromedriver.
 
 Returns:
-    list: list of dictionary containing game information
-    - games are sorted in order of game time since they are scraped in the order displayed by the website
+    List[Dict]: list of dictionary containing game information
+    - sorted in order of game time since they are scraped in the order displayed by the website
       which is already sorted
 """
 def get_sb_odds(driver_path):
@@ -98,6 +98,7 @@ def get_sb_odds(driver_path):
                 if market.find_element(By.CSS_SELECTOR, '[data-automation-id="market-coupon-label"]').text in market_names:
                     odds = market.find_elements(By.CSS_SELECTOR, '[data-automation-id="price-text"]')
                     game_details['team1_odds'], game_details['team2_odds'] = odds[0].text, odds[1].text
+                    found = True
                     break
             
             # If desired market wasn't found. then don't add to return list and continue
