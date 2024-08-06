@@ -2,7 +2,9 @@ import os
 from webdriver_manager.chrome import ChromeDriverManager
 from pinnacle import get_pin_odds
 from tab import get_tab_odds
+from sportsbet import get_sb_odds
 from helper import convert_odds
+from match_events import get_pos_ev
 
 def main():
     # Install chrome driver in current directory
@@ -10,7 +12,12 @@ def main():
     driver_path = ChromeDriverManager().install()
 
     pin_odds = convert_odds(get_pin_odds(driver_path))
+    print(pin_odds)
     tab_odds = get_tab_odds(driver_path)
+    #print(tab_odds)
+    sb_odds = get_sb_odds(driver_path)
+    print(get_pos_ev(pin_odds, tab_odds))
+    print(get_pos_ev(pin_odds, sb_odds))
 
 
 if __name__ == '__main__':
