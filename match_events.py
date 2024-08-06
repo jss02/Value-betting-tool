@@ -23,7 +23,19 @@ def match_teams(game1, game2):
 
     return False
     
+"""
+get_pos_ev(pin, book2)
 
+Finds odds from book2 that are of positive value relative to the odds given by pin List[float] and returns
+them in a list with outcome name, odds, value, and link
+
+Params:
+    pin List[float]: List of true odds according to pinnacle.com bookmaker
+    book2 List[float]: List of odds from another bookmaker
+
+Returns:
+    List[Dict]: list of dictionary containing information on the outcome with +EV
+"""
 def get_pos_ev(pin, book2):
     # Return if one of the lists are empty
     if not pin or not book2:
