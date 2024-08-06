@@ -25,7 +25,11 @@ def match_teams(game1, game2):
     
 
 def get_pos_ev(pin, book2):
-    ret = []
+    # Return if one of the lists are empty
+    if not pin or not book2:
+        return[]
+    
+    ret = [] # return list
 
     # Reverse book2 list as popping is more efficient than remove method
     book2.reverse()
@@ -37,7 +41,7 @@ def get_pos_ev(pin, book2):
         for i in range(last, -1, -1):
             game2 = book2[i]
 
-            # Stop iterating if the datetime doesn't match within 10 minutes
+            # Stop iterating if the game2 is more than 10 minutes after game1 since the list iterates to later events
             if not match_datetimes(game['datetime'], game2['datetime']):
                 break
             
