@@ -58,12 +58,9 @@ def get_sb_odds(driver_path):
             gametime = datetime.strptime(match, '%Y-%m-%dT%H:%M:%S')
         else:
             continue # Skip game
-        
-        # Get game link
-        game_link = event.find_element(By.TAG_NAME, 'a').get_attribute('href')
 
         # Initialise dict containing game information
-        game_details = {'datetime': gametime, 'link': game_link}
+        game_details = {'datetime': gametime}
 
         # Find if h2 element containing game title is present within the event, if not then it is a multi market
         # container meaning it is in a different structure to a single market container
