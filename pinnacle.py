@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime, timedelta, time
 
 # Temporary link
-web = "https://www.pinnacle.com/en/soccer/england-premier-league/matchups/#all"
+web = "https://www.pinnacle.com/en/baseball/mlb/matchups/#period:0"
 
 # Helper function that converts given date string to datetime object
 def format_date(date):
@@ -36,6 +36,7 @@ def get_pin_odds(driver_path):
     driver_options = Options()
     driver_options.add_argument("--headless")
     driver_options.add_argument('log-level=3')
+    driver_options.add_argument('window-size=1920x1080')
 
     # Set up webdriver
     driver = webdriver.Chrome(service=Service(driver_path), options=driver_options)
@@ -44,7 +45,7 @@ def get_pin_odds(driver_path):
     driver.get(web)
 
     # Wait until webdriver finds content block containing the games
-    events = WebDriverWait(driver, 7).until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'contentBlock square')]")))
+    events = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.contentBlock.square")))
 
     # list for storing games and their information
     games = []
