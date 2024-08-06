@@ -86,6 +86,7 @@ def get_sb_odds(driver_path):
             # Add team names to dict
             game_details['team1'] = event.find_element(By.CSS_SELECTOR, '[data-automation-id="participant-one"]').text
             game_details['team2'] = event.find_element(By.CSS_SELECTOR, '[data-automation-id="participant-two"]').text
+            game_details['name'] = game_details['team1'] + ' v ' + game_details['team2']
             
             # Get grid of markets and iterate through them
             market_grid = event.find_element(By.CLASS_NAME, 'market-coupon-grid')
