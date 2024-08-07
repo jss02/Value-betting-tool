@@ -2,3 +2,4 @@
 .wdm
 __pycache__
 *.png
+*.txt

@@ -99,7 +99,7 @@ def get_sb_odds(driver_path):
                     found = True
                     break
             
-            # If desired market wasn't found. then don't add to return list and continue
+            # If desired market wasn't found, don't add to return list and continue
             if not found:
                 continue
         
