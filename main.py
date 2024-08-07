@@ -12,9 +12,7 @@ def main():
     driver_path = ChromeDriverManager().install()
 
     pin_odds = convert_odds(get_pin_odds(driver_path))
-    print(pin_odds)
     tab_odds = get_tab_odds(driver_path)
-    #print(tab_odds)
     sb_odds = get_sb_odds(driver_path)
     print(get_pos_ev(pin_odds, tab_odds))
     print(get_pos_ev(pin_odds, sb_odds))
