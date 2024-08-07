@@ -5,10 +5,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from bs4 import BeautifulSoup
 from datetime import datetime, timedelta, time
 
 # Temporary link
-web = "https://www.pinnacle.com/en/baseball/mlb/matchups/#period:0"
+web = "https://www.pinnacle.com/en/soccer/england-premier-league/matchups/#all"
 
 # Helper function that converts given date string to datetime object
 def format_date(date):
@@ -17,7 +18,7 @@ def format_date(date):
     elif "TOMORROW" in date.text:
         return datetime.combine(datetime.today() + timedelta(days=1), time(0, 0))
     else:
-        return datetime.strptime(date.find_element(By.TAG_NAME, 'span').text.split(', ', 1)[1], '%b %d, %Y')
+        return datetime.strptime(date.find('span').text.split(', ', 1)[1], '%b %d, %Y')
 
 """
 get_pin_odds(driver_path)
@@ -47,31 +48,38 @@ def get_pin_odds(driver_path):
     driver.get(web)
 
     # Wait until webdriver finds content block containing the games
-    events = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.contentBlock.square")))
+    WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.contentBlock.square")))
 
-    # list for storing games and their information
-    games = []
-    
     driver.get_screenshot_as_file("pin.png") # Take screenshot of current page for debugging
 
+    # Get page and close driver
+    page_source = driver.page_source
+    driver.quit()
+
+    # Parse with BeautifulSoup
+    soup = BeautifulSoup(page_source, "html.parser")
+
+    # Get list of events
+    events = soup.select_one("div.contentBlock.square")
+    
+     # list for storing games and their information
+    games = []
+    
     # Get all rows of events and iterate through them
-    rows = events.find_elements(By.XPATH, "./*")
-    for row in rows:
+    for row in events.children:
         # If row is a row containing the date only, set date
-        if "dateBar" in row.get_attribute('class'):
+        if "dateBar" in ' '.join(row.get('class', [])):
             game_datetime = format_date(row)
-        
         # Else it either contains the game information or market label (1 x 2, handicap, O/U etc.)
         else:
             game_details = {}
 
             # Iterate through columns of row to extract 
-            columns = row.find_elements(By.XPATH, "./*")
-            for col in columns:
+            for col in row.children:
                 # If column contains metadata (team names and game time)
-                if "metadata" in col.get_attribute('class'):
+                if "metadata" in ' '.join(col.get('class', [])):
                     # Add team names to dict
-                    game_info = col.find_elements(By.TAG_NAME, 'span')
+                    game_info = col.find_all('span')
                     game_details['team1'] = game_info[0].text.split('(')[0].strip()
                     game_details['team2'] = game_info[1].text.split('(')[0].strip()
 
@@ -80,9 +88,9 @@ def get_pin_odds(driver_path):
                     game_details['datetime'] = game_datetime.replace(hour=hrs, minute=mins)
                 
                 # Else if it contains moneyline odds
-                elif "moneyline" in col.get_attribute('class'):
+                elif "moneyline" in ' '.join(col.get('class', [])):
                     # Get odds
-                    odds = col.find_elements(By.TAG_NAME, 'span')
+                    odds = col.find_all('span')
 
                     # Skip if game odds are suspended or unavailable
                     if len(odds) < 2:
@@ -103,9 +111,7 @@ def get_pin_odds(driver_path):
                     games.append(game_details)
 
                     break # Move to next row as we only want moneyline odds
-                    
-    driver.quit()
-
+                       
     return games
 
 if __name__ == '__main__':
