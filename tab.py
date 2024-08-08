@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
+from bs4 import BeautifulSoup
 from datetime import datetime
 
 # Temporary link
@@ -37,46 +38,58 @@ def get_tab_odds(driver_path):
     # Open URL
     driver.get(web)
 
+    # Wait until webdriver finds element containing the games
+    WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, "customised-template")))
+
+    driver.get_screenshot_as_file("tab.png") # Take screenshot of current page for debugging
+    
+    # Get page and close driver
+    page_source = driver.page_source
+    driver.quit()
+
+    # Parse with BeautifulSoup
+    soup = BeautifulSoup(page_source, "html.parser")
+
+    # Get list of events
+    events = soup.find('div', class_=["customised-template"])
+
     # list for storing games and their information
     games = []
 
-    driver.get_screenshot_as_file("tab.png") # Take screenshot of current page for debugging
-
     # Get all events and iterate through them
-    events = WebDriverWait(driver, 7).until(EC.presence_of_element_located((By.CLASS_NAME, "customised-template")))
-    for row in events.find_elements(By.XPATH, "./*"):
+    for row in events.find_all('div', class_='template-item'):
         # If game is live, skip
-        if "live" in row.get_attribute('class'):
+        if "live" in ' '.join(row.get('class', [])):
             continue
         
         game_details = {}
 
         # Get match name and store team names
-        matchname = row.find_element(By.CLASS_NAME, "match-name-text").text
+        matchname = row.find('span', class_="match-name-text").text
         game_details['name'] = matchname
         game_details['team1'], game_details['team2'] = [x.strip() for x in matchname.split(' v ', 1)]
 
         # Get game time and add to dict as datetime object
         try:
-            gametime = row.find_element(By.CSS_SELECTOR, "[data-test='close-time']").text
+            gametime = row.find('li', {'data-test': 'close-time'}).text
             game_details['datetime'] = datetime.strptime(gametime, "%a %d %b %H:%M").replace(year=datetime.now().year)
         except NoSuchElementException:
             # If element isn't found, then even is suspended and skip
             continue
         
         # Iterate through columns and save odds into a list
-        columns = row.find_element(By.CLASS_NAME, "propositions-wrapper")
+        columns = row.find('div', class_="propositions-wrapper")
         odds = []
-        for col in columns.find_elements(By.XPATH, "./*"):
+        for col in columns.find_all('div', class_='proposition-wrapper'):
 
             # Check if column odds market
-            market = col.find_element(By.CLASS_NAME, "proposition-bet-option").get_attribute('data-content')
-            # Skip if the market is Line as some sports also display line along with Head To Head
+            market = col.find('span', class_="proposition-bet-option").get('data-content')
+            # Skip if the market is Line as some sports also display the Line along with Head To Head
             if market == "Line":
                 continue
             
             # Add odd to list of odds if it isn't the Line odds
-            odds.append(float(col.find_element(By.CLASS_NAME, "animate-odd").text))
+            odds.append(float(col.find('div', class_="animate-odd").text))
 
         # Skip if there isn't more than one odd
         if len(odds) < 2: 
