@@ -9,13 +9,13 @@ from bs4 import BeautifulSoup
 from datetime import datetime, timedelta, time
 
 # Temporary link
-web = "https://www.pinnacle.com/en/soccer/england-premier-league/matchups/#all"
+web = "https://www.pinnacle.com/en/aussie-rules/aussie-rules-football-afl/matchups/#period:0"
 
 # Helper function that converts given date string to datetime object
 def format_date(date):
-    if "TODAY" in date.text:
+    if "today" in date.text.lower():
         return datetime.combine(datetime.today(), time(0, 0))
-    elif "TOMORROW" in date.text:
+    elif "tomorrow" in date.text.lower():
         return datetime.combine(datetime.today() + timedelta(days=1), time(0, 0))
     else:
         return datetime.strptime(date.find('span').text.split(', ', 1)[1], '%b %d, %Y')
@@ -64,7 +64,7 @@ def get_pin_odds(driver_path):
     
      # list for storing games and their information
     games = []
-    
+
     # Get all rows of events and iterate through them
     for row in events.children:
         # If row is a row containing the date only, set date
