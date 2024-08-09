@@ -8,9 +8,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta, time
 
-# Temporary link
-web = "https://www.pinnacle.com/en/aussie-rules/aussie-rules-football-afl/matchups/#period:0"
-
 # Helper function that converts given date string to datetime object
 def format_date(date):
     if "today" in date.text.lower():
@@ -33,7 +30,7 @@ Returns:
     - sorted in order of game time since they are scraped in the order displayed by the website
       which is already sorted
 """
-def get_pin_odds(driver_path):
+def get_pin_odds(driver_path, web):
 
     # Set webdriver options
     driver_options = Options()
@@ -115,4 +112,4 @@ def get_pin_odds(driver_path):
     return games
 
 if __name__ == '__main__':
-    print(get_pin_odds(None))
+    print(get_pin_odds(None, 'https://www.pinnacle.com/en/rugby-league/nrl/matchups/#period:0'))

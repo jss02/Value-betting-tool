@@ -9,9 +9,6 @@ from selenium.common.exceptions import NoSuchElementException
 from bs4 import BeautifulSoup
 from datetime import datetime
 
-# Temporary link
-web = 'https://www.tab.com.au/sports/betting/Soccer/competitions/English%20Premier%20League'
-
 """
 get_tab_odds(driver_path)
 
@@ -25,7 +22,7 @@ Returns:
     - sorted in order of game time since they are scraped in the order displayed by the website
       which is already sorted
 """
-def get_tab_odds(driver_path):
+def get_tab_odds(driver_path, web):
 
     # Set webdriver options
     driver_options = Options()
@@ -109,4 +106,4 @@ def get_tab_odds(driver_path):
     return games
        
 if __name__ == '__main__':
-    print(get_tab_odds(None))
+    print(get_tab_odds(None, 'https://www.tab.com.au/sports/betting/Rugby%20League/competitions/NRL'))

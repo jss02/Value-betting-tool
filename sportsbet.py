@@ -8,9 +8,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
 import re
 
-# Temp link
-web = 'https://www.sportsbet.com.au/betting/australian-rules/afl'
-
 """
 get_sb_odds(driver_path)
 
@@ -24,7 +21,7 @@ Returns:
     - sorted in order of game time since they are scraped in the order displayed by the website
       which is already sorted
 """
-def get_sb_odds(driver_path):
+def get_sb_odds(driver_path, web):
 
     # Set webdriver options
     driver_options = Options()
@@ -95,7 +92,7 @@ def get_sb_odds(driver_path):
                 # If current market is Head to head, Match betting, or Money line then add to dict and break
                 if market.find_element(By.CSS_SELECTOR, '[data-automation-id="market-coupon-label"]').text in market_names:
                     odds = market.find_elements(By.CSS_SELECTOR, '[data-automation-id="price-text"]')
-                    game_details['team1_odds'], game_details['team2_odds'] = odds[0].text, odds[1].text
+                    game_details['team1_odds'], game_details['team2_odds'] = float(odds[0].text), float(odds[1].text)
                     found = True
                     break
             
@@ -108,4 +105,4 @@ def get_sb_odds(driver_path):
     return games
 
 if __name__ == '__main__':
-    print(get_sb_odds(None))
+    print(get_sb_odds(None, 'https://www.sportsbet.com.au/betting/rugby-league/nrl'))
