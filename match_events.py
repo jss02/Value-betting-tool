@@ -111,7 +111,8 @@ def get_pos_ev(pin, book2):
             
             # Add to return list if value is positive
             if value:
-                ret.append({'name': game2['name'], 'outcome': game2[f"team{match_key}"], 'odds': game2[f"team{match_key}_odds"], 'value': value})
+                ret.append({'name': game2['name'], 'outcome': game2[f"team{match_key}"],
+                            'odds': game2[f"team{match_key}_odds"], 'value': value, 'datetime': game2['datetime']})
             match_key = 2 if match_key == 1 else 1 # Change match_key accordingly for bookmaker2 
         
         # Check if draw outcome is available
@@ -119,6 +120,7 @@ def get_pos_ev(pin, book2):
             value = calc_value(game2["draw"], game["draw"])
             # Add to return list if value is positive
             if value:
-                ret.append({'name': game2['name'], 'outcome': 'draw', 'odds': game2['draw'], 'value': value})
+                ret.append({'name': game2['name'], 'outcome': 'draw', 'odds': game2['draw'], 'value': value,
+                            'datetime': game2['datetime']})
    
     return ret
