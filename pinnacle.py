@@ -45,7 +45,7 @@ def get_pin_odds(driver_path, web):
     driver.get(web)
 
     # Wait until webdriver finds content block containing the games
-    WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.contentBlock.square")))
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.contentBlock.square")))
 
     driver.get_screenshot_as_file("pin.png") # Take screenshot of current page for debugging
 
