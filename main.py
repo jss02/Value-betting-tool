@@ -6,6 +6,7 @@ from sportsbet import get_sb_odds
 from helper import convert_odds
 from match_events import get_pos_ev
 from link_manager import links
+from selenium.common.exceptions import WebDriverException
 
 def main():
     # Install chrome driver in current directory
@@ -13,9 +14,12 @@ def main():
     driver_path = ChromeDriverManager().install()
 
     for link in links.values():
-        pin_odds = convert_odds(get_pin_odds(driver_path, link['pin']))
-        tab_odds = get_tab_odds(driver_path, link['tab'])
-        sb_odds = get_sb_odds(driver_path, link['sb'])
+        try:
+            pin_odds = convert_odds(get_pin_odds(driver_path, link['pin']))
+            tab_odds = get_tab_odds(driver_path, link['tab'])
+            sb_odds = get_sb_odds(driver_path, link['sb'])
+        except WebDriverException:
+            continue
         print(get_pos_ev(pin_odds, tab_odds))
         print(get_pos_ev(pin_odds, sb_odds))
 
