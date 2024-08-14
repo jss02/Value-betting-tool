@@ -37,7 +37,7 @@ Margin Proportional to the Odds was chosen as it was the simplest of the two mod
 
 \
 It also yielded profits slightly above the expected yield when used as the model to calculate true odds.
-<p align='center'><img width=80% src='assets/margin_prop_returns.JPG'></p>
+<p align='center'><img width=60% src='assets/margin_prop_returns.JPG'></p>
 
 ## Installation
 1. Clone the repository
