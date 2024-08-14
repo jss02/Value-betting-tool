@@ -33,11 +33,11 @@ Where:
 ### Margin Proportional to the Odds
 Margin Proportional to the Odds was chosen as it was the simplest of the two models that best yielded the true odds based on the data.
 <p align='center'><img width=60% src='assets/margin_returns.JPG'></p>
-- Table represents the yield from bets with 0 expected value based on the margin models
+- Graph represents the yield from bets with 0 expected value based on the margin models
 
 \
 It also yielded profits slightly above the expected yield when used as the model to calculate true odds.
-<p align='center'><img src='assets/margin_prop_returns.JPG'></p>
+<p align='center'><img width=80% src='assets/margin_prop_returns.JPG'></p>
 
 ## Installation
 1. Clone the repository
@@ -83,7 +83,7 @@ Theory based on <a href='https://www.football-data.co.uk/The_Wisdom_of_the_Crowd
 
 ## Potential improvements
 ### Multithreading
-Multithreading would make the program faster as we could scrape multiple websites at once. Opening the webdriver sequentially wastes a lot of time at I/O waiting for as chromedriver which is slow to load the websites.
+Multithreading would make the program faster as multiple websites could be scraped at once. Opening the webdriver sequentially wastes a lot of time at I/O waiting for as chromedriver which is slow to load the websites.
 
 ### Using betfair odds to calculate true odds
 Pinnacle delays odds by 15 minutes for users that are not logged in. Using Betfair exchange odds through their API (costs £299) would improve the accuracy of the results.
