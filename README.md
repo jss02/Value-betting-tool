@@ -15,7 +15,7 @@ Value betting is betting on outcomes that have a higher probability to occur tha
 ### Removing the margin to get the true odds
 The margin from Pinnacle's odds are removed using the Margin Proportional to the Odds formula:
 
-$ odds_{true}=\frac{n*odds_{pinnacle}}{n-M*odds_{pinnacle}} $
+$odds_{true}=\frac{n\*odds_{pinnacle}}{n-M\*odds_{pinnacle}}$
 
 Where:
 - $odds_{true}$: true odds of an outcome
