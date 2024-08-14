@@ -12,6 +12,8 @@ Based on <a href='https://www.football-data.co.uk/The_Wisdom_of_the_Crowd_update
 Value betting is betting on outcomes that have a higher probability to occur than implied by the available odds, resulting in positive expected value.
 <p align="center"><a href="https://www.techopedia.com/gambling-guides/value-betting" ><img width=80% src='https://www.techopedia.com/wp-content/uploads/2023/05/Value-betting-explained.jpg'></a></p>
 
+Thus, by finding bookmaker odds that are above the true odds, a profit should be made in the long term as variance diminishes with larger volume.
+
 ### Removing the margin to get the true odds
 The margin from Pinnacle's odds are removed using the Margin Proportional to the Odds formula:
 
