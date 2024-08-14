@@ -38,7 +38,7 @@ def get_tab_odds(driver_path, web):
     # Wait until webdriver finds element containing the games
     WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, "customised-template")))
 
-    driver.get_screenshot_as_file("tab.png") # Take screenshot of current page for debugging
+    # driver.get_screenshot_as_file("tab.png") # Take screenshot of current page for debugging
     
     # Get page and close driver
     page_source = driver.page_source

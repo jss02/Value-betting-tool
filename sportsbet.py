@@ -40,7 +40,7 @@ def get_sb_odds(driver_path, web):
     # List of markets that we want to scrape
     market_names = ["Head to Head", "Match Betting", "Money Line"]
 
-    driver.get_screenshot_as_file("sb.png") # Take screenshot of current page for debugging
+    # driver.get_screenshot_as_file("sb.png") # Take screenshot of current page for debugging
 
     # Get list of events and iterate through them
     events = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[data-automation-id='competition-matches-container']")))
