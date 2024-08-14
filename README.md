@@ -15,7 +15,7 @@ Value betting is betting on outcomes that have a higher probability to occur tha
 ### Removing the margin to get the true odds
 The margin from Pinnacle's odds are removed using the Margin Proportional to the Odds formula:
 
-$odds_{true}=\frac{n*odds_{pinnacle}}{n-M*odds_{pinnacle}}$
+$ odds_{true}=\frac{n*odds_{pinnacle}}{n-M*odds_{pinnacle}} $
 
 Where:
 - $odds_{true}$: true odds of an outcome
@@ -24,7 +24,7 @@ Where:
 
 The margin is given by:
 
-$M=\frac{1}{odds_{1}} + \frac{1}{odds_{2}} + ... - 1 = \sum_{i=1}^n \frac{1}{odds_{i}}$ - 1
+$M=\frac{1}{odds_{1}} + \frac{1}{odds_{2}} + ... - 1 = \sum_{i=1}^n \frac{1}{odds_{i}}$  - 1
 
 Where:
 - $M$: margin
@@ -36,10 +36,8 @@ Margin Proportional to the Odds was chosen as it was the simplest of the two mod
 - Table represents the yield from bets with 0 expected value based on the margin models
 
 \
-It also yielded profits above the expected yield when used as the model to calculate true odds.
+It also yielded profits slightly above the expected yield when used as the model to calculate true odds.
 <p align='center'><img src='assets/margin_prop_returns.JPG'></p>
-
-
 
 ## Installation
 1. Clone the repository
@@ -71,7 +69,7 @@ py src/main.py not_tab
 To add a link:
 1. Get links for the league of the sport you want to add
 	- Must be the URL displaying the odds for the events of the whole league
-		- Examples: <a href='assets/pin.png' >Pinnacle</a> <a href='assets/tab.png' >Tab</a> <a href='assets/tab.png' >Sportsbet</a>
+		- Examples: <a href='assets/pin.png' >Pinnacle</a> <a href='assets/tab.png' >Tab</a> <a href='assets/sb.png' >Sportsbet</a>
 2. Add to links dictionary in `link_manager.py` in the format:
 ```Python3
 '<league_name>': {'pin': '<link for pinnacle>', 'sb': '<link for sportsbet>', 'tab': '<link for tab>'}
