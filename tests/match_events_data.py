@@ -52,13 +52,20 @@ football_fuzz_return = [
 ]
 
 football_ev_return = [
-    {'name': 'Man United v Fulham', 'outcome': 'Man United', 'odds': 1.5, 'value': 0.006711409395973256},
-    {'name': 'Man United v Fulham', 'outcome': 'draw', 'odds': 4.5, 'value': 0.006711409395973256},
-    {'name': 'Ipswich v Liverpool', 'outcome': 'Ipswich', 'odds': 8.0, 'value': 0.1049723756906078},
-    {'name': 'Ipswich v Liverpool', 'outcome': 'Liverpool', 'odds': 1.35, 'value': 0.00746268656716409},
-    {'name': 'Nottinghm Forest v Bournemouth', 'outcome': 'draw', 'odds': 3.4, 'value': 0.00591715976331364},
-    {'name': 'Arsenal v Wolverhampton', 'outcome': 'Arsenal', 'odds': 1.2, 'value': 0.022146507666098936},
-    {'name': 'Arsenal v Wolverhampton', 'outcome': 'Wolverhampton', 'odds': 13.0, 'value': 0.1130136986301371}
+    {'name': 'Man United v Fulham', 'outcome': 'Man United', 'odds': 1.5, 'value': 0.006711409395973256,
+     'datetime': datetime.datetime(2024, 8, 17, 5, 0)},
+    {'name': 'Man United v Fulham', 'outcome': 'draw', 'odds': 4.5, 'value': 0.006711409395973256,
+     'datetime': datetime.datetime(2024, 8, 17, 5, 0)},
+    {'name': 'Ipswich v Liverpool', 'outcome': 'Ipswich', 'odds': 8.0, 'value': 0.1049723756906078,
+     'datetime': datetime.datetime(2024, 8, 17, 21, 30)},
+    {'name': 'Ipswich v Liverpool', 'outcome': 'Liverpool', 'odds': 1.35, 'value': 0.00746268656716409,
+     'datetime': datetime.datetime(2024, 8, 17, 21, 30)},
+    {'name': 'Nottinghm Forest v Bournemouth', 'outcome': 'draw', 'odds': 3.4, 'value': 0.00591715976331364,
+     'datetime': datetime.datetime(2024, 8, 18, 0, 0)},
+    {'name': 'Arsenal v Wolverhampton', 'outcome': 'Arsenal', 'odds': 1.2, 'value': 0.022146507666098936,
+     'datetime': datetime.datetime(2024, 8, 18, 0, 0)},
+    {'name': 'Arsenal v Wolverhampton', 'outcome': 'Wolverhampton', 'odds': 13.0, 'value': 0.1130136986301371,
+     'datetime': datetime.datetime(2024, 8, 18, 0, 0)}
 ]
 
 # Test data for pinnacle NRL games
@@ -107,10 +114,14 @@ nrl_fuzz_return = [
 ]
 
 nrl_ev_return = [
-    {'name': 'South v Melbourne', 'outcome': 'Souths', 'odds': 5.5, 'value': 0.21145374449339216},
-    {'name': 'Gold Coast v Cronulla', 'outcome': 'Cronulla', 'odds': 2.45, 'value': 0.008230452674897082},
-    {'name': 'Parramatta v Penrith', 'outcome': 'Parramatta', 'odds': 6.0, 'value': 0.2847965738758029},
-    {'name': 'Canberra v Manly', 'outcome': 'Canberra', 'odds': 2.3, 'value': 0.03139013452914785}
+    {'name': 'South v Melbourne', 'outcome': 'Souths', 'odds': 5.5, 'value': 0.21145374449339216,
+     'datetime': datetime.datetime(2024, 8, 8, 19, 50)},
+    {'name': 'Gold Coast v Cronulla', 'outcome': 'Cronulla', 'odds': 2.45, 'value': 0.008230452674897082,
+     'datetime': datetime.datetime(2024, 8, 9, 18, 0)},
+    {'name': 'Parramatta v Penrith', 'outcome': 'Parramatta', 'odds': 6.0, 'value': 0.2847965738758029,
+     'datetime': datetime.datetime(2024, 8, 9, 20, 0)},
+    {'name': 'Canberra v Manly', 'outcome': 'Canberra', 'odds': 2.3, 'value': 0.03139013452914785,
+     'datetime': datetime.datetime(2024, 8, 10, 15, 0)}
 ]
 
 pin_data_football_complex = [
