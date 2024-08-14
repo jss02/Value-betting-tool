@@ -19,9 +19,10 @@ def main():
             tab_odds = get_tab_odds(driver_path, link['tab'])
             sb_odds = get_sb_odds(driver_path, link['sb'])
         except WebDriverException:
+            print(f'Error scraping {link}')
             continue
-        print(get_pos_ev(pin_odds, tab_odds))
-        print(get_pos_ev(pin_odds, sb_odds))
+        print(get_pos_ev(pin_odds, tab_odds), link['tab'])
+        print(get_pos_ev(pin_odds, sb_odds), link['sb'])
 
 if __name__ == '__main__':
     main() 
