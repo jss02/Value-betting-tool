@@ -49,8 +49,9 @@ def get_sb_odds(driver_path, web):
         # Check if <time> element is present, otherwise it is a live game
         gametime_list = event.find_elements(By.TAG_NAME, 'time')
         if gametime_list:
-            # Although time is given in ISO 8601 format, there is a known python3.10 bug that gives format error
-            # when fractional seconds are given in 4 decimals, so we must regex and then convert to datetime
+            # Regex time and then convert to datetime
+                # Note: time is given in ISO 8601 format but we cannot use datetime.fromisoformat due to a python3.10 
+                # bug that produces format error when fractional seconds are given in 4 decimals
             match = re.search(r'(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})', gametime_list[0].get_attribute('datetime')).group(1)
             gametime = datetime.strptime(match, '%Y-%m-%dT%H:%M:%S')
         else:

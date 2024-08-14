@@ -59,7 +59,7 @@ def get_pin_odds(driver_path, web):
     # Get list of events
     events = soup.select_one("div.contentBlock.square")
     
-     # list for storing games and their information
+    # list for storing games and their information
     games = []
 
     # Get all rows of events and iterate through them
@@ -67,8 +67,8 @@ def get_pin_odds(driver_path, web):
         # If row is a row containing the date only, set date
         if "dateBar" in ' '.join(row.get('class', [])):
             game_datetime = format_date(row)
-        # Else it either contains the game information or market label (1 x 2, handicap, O/U etc.)
         else:
+        # Else it either contains the game information or market label (1 x 2, handicap, O/U etc.)
             game_details = {}
 
             # Iterate through columns of row to extract 

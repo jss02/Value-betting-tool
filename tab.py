@@ -71,7 +71,7 @@ def get_tab_odds(driver_path, web):
             gametime = row.find('li', {'data-test': 'close-time'}).text
             game_details['datetime'] = datetime.strptime(gametime, "%a %d %b %H:%M").replace(year=datetime.now().year)
         except NoSuchElementException:
-            # If element isn't found, then even is suspended and skip
+            # If element isn't found, then event is suspended and skip
             continue
         
         # Iterate through columns and save odds into a list
