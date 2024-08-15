@@ -1,6 +1,8 @@
 # Value Betting Software
 ![Python](https://img.shields.io/badge/python-3.10-blue) ![Release](https://img.shields.io/badge/version-v1.0-clairvoyant) [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://github.com/jss02/Value-betting-software/blob/src/LICENSE.txt)
-<p align='center'><a href='https://www.pinnacle.com/en/'><img width='150' height='80' src="https://logowik.com/content/uploads/images/pinnacle2317.logowik.com.webp"></a><a href='https://www.sportsbet.com.au/' ><img width='150' height='80' src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Sportsbet_Logo.jpg"></a><a href='https://www.tab.com.au/' ><img width='150' height='80' src="https://logovectorseek.com/wp-content/uploads/2020/04/tab-com-au-logo-vector.png"></a></p>
+<p align='center'><a href='https://www.pinnacle.com/en/'><img width='150' height='80' src="https://logowik.com/content/uploads/images/pinnacle2317.logowik.com.webp"></a>
+<a href='https://www.sportsbet.com.au/' ><img width='150' height='80' src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Sportsbet_Logo.jpg"></a>
+<a href='https://www.tab.com.au/' ><img width='150' height='80' src="https://logovectorseek.com/wp-content/uploads/2020/04/tab-com-au-logo-vector.png"></a></p>
 
 ## Description
 Python program that identifies bookmaker pricings with positive expected value. Uses Pinnacle's odds to calculate the true odds of events.
@@ -25,11 +27,11 @@ These opportunities arise when the soft book is slow to adjust their odds compar
 
 
 ### Calculating the true odds
-From <a href='https://www.football-data.co.uk/' >football-data.co.uk</a>'s <a href='https://www.football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf'>study</a> (p.15-16) on the correlation between the expected returns (defined by the ratio of odds from
+From <a href='https://www.football-data.co.uk/' >football-data.co.uk</a>'s <a href='https://www.football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf#page=15'>study</a> (p.15-16) on the correlation between the expected returns (defined by the ratio of odds from
 one of the 4 leading UK bookmakers to Pinnacle's implied true odds) and the actual returns, we can see that there is a strong, near 1:1 correlation. Thus, the theory that Pinnacle's odds can be used to calcalute the true odds has practical significance and 
 will be employed for this purpose.
 
-<p align='center'><img width=60% src='assets/pinnacle accuracy.png'></p>
+<p align='center'><a href='https://football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf#page=16'><img width=60% src='assets/pinnacle accuracy.png'></a></p>
 
 To obtain the true odds of an event, the margin from Pinnacle's odds is removed using the Margin Proportional to the Odds formula:
 
@@ -51,12 +53,12 @@ Where:
 
 ### Margin Proportional to the Odds
 Margin Proportional to the Odds was chosen as it was the simplest of the two models that best yielded the true odds based on the data.
-<p align='center'><img width=60% src='assets/margin_returns.JPG'></p>
+<p align='center'><a href='https://football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf#page=10'><img width=60% src='assets/margin_returns.JPG'></a></p>
 - Graph represents the yield from bets with 0 expected value based on the margin models
 
 \
 It also yielded profits slightly above the expected yield when used as the model to calculate true odds.
-<p align='center'><img width=60% src='assets/margin_prop_returns.JPG'></p>
+<p align='center'><a href='https://football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf#page=12'><img width=60% src='assets/margin_prop_returns.JPG'></a></p>
 
 All graphs are from <a href='https://www.football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf' >football-data.co.uk</a>.
 
