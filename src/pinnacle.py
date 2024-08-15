@@ -112,4 +112,4 @@ def get_pin_odds(driver_path, web):
     return games
 
 if __name__ == '__main__':
-    print(get_pin_odds(None, 'https://www.pinnacle.com/en/rugby-league/nrl/matchups/#period:0'))
+    print(get_pin_odds(None, lambda: 'https://www.pinnacle.com/en/rugby-league/nrl/matchups/#period:0'))

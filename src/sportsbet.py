@@ -106,4 +106,4 @@ def get_sb_odds(driver_path, web):
     return games
 
 if __name__ == '__main__':
-    print(get_sb_odds(None, 'https://www.sportsbet.com.au/betting/rugby-league/nrl'))
+    print(get_sb_odds(None, lambda: 'https://www.sportsbet.com.au/betting/rugby-league/nrl'))

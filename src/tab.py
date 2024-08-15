@@ -106,4 +106,4 @@ def get_tab_odds(driver_path, web):
     return games
        
 if __name__ == '__main__':
-    print(get_tab_odds(None, 'https://www.tab.com.au/sports/betting/Rugby%20League/competitions/NRL'))
+    print(get_tab_odds(None, lambda: 'https://www.tab.com.au/sports/betting/Rugby%20League/competitions/NRL'))
