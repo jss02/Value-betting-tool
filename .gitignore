@@ -1,5 +1,4 @@
 /venv
 .wdm
 __pycache__
-*.png
-*.txt
+/*.png

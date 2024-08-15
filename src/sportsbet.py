@@ -32,7 +32,7 @@ def get_sb_odds(driver_path, web):
     driver = webdriver.Chrome(service=Service(driver_path), options=driver_options)
 
     # Open URL
-    driver.get(web)
+    driver.get(web())
 
     # list for storing games and their information
     games = []

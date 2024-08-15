@@ -2,8 +2,8 @@ from match_events_data import *
 import sys
 import os
 
-parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.append(parent_dir)
+src_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../src'))
+sys.path.append(src_dir)
 from match_events import match_teams, get_pos_ev
 
 # Helper function that swaps team1 and team2
