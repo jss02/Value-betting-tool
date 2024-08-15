@@ -65,7 +65,7 @@ All graphs are from <a href='https://www.football-data.co.uk/The_Wisdom_of_the_C
 ## Installation
 1. Clone the repository
 ```
-git clone
+git clone https://github.com/jss02/Value-betting-software.git
 ```
 2. Change to project directory
 ```
