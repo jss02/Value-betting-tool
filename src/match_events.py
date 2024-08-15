@@ -4,7 +4,7 @@ from collections import deque
 
 # Helper function to determine if odds have value
 def calc_value(odds, true_odds):
-    if odds > true_odds:
+    if odds > true_odds and odds/true_odds - 1 > 0.01:
         return odds/true_odds - 1
     return False
 
