@@ -5,22 +5,39 @@
 ## Description
 Python program that identifies bookmaker pricings with positive expected value. Uses Pinnacle's odds to calculate the true odds of events.
 
-Based on <a href='https://www.football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf' >Wisdom of the Crowd</a> by <a href='https://www.football-data.co.uk/' >football-data.co.uk</a>.
-- More concise web article <a href='https://www.football-data.co.uk/blog/wisdom_of_the_crowd.php' >here</a>.
-
 ### Value betting
 Value betting is betting on outcomes that have a higher probability to occur than implied by the available odds, resulting in positive expected value.
 <p align="center"><a href="https://www.techopedia.com/gambling-guides/value-betting" ><img width=80% src='https://www.techopedia.com/wp-content/uploads/2023/05/Value-betting-explained.jpg'></a></p>
 
-Thus, by finding bookmaker odds that are above the true odds, a profit should be made in the long term as variance diminishes with larger volume.
+For example, the true odds of a coinflip is $2 (50% chance). If we could bet on an outcome (heads or tails) for $2.1, we would have a bet with positive expected value.
 
-### Removing the margin to get the true odds
-The margin from Pinnacle's odds are removed using the Margin Proportional to the Odds formula:
+$value = \frac{2.1}{2} - 1 = 0.05$
+
+Thus, by finding bookmaker odds that are above the true odds, a profit should be made in the long term as variance diminishes with volume.
+
+### Theory
+Pinnacle has a reputation as one of the sharpest bookmakers in the world, with the smallest margins in the industry and a 'winners welcome' policy. 
+By not restricting sharp bettors and offering high liquidity, they effectively price in 'sharp' information to maintain tight and accurate odds.
+On the contrary, unlike Pinnacle who rely on high volume to compensate for their low margins as their business model, other bookmakers offer higher margin
+but lazy (less accurate) odds. These 'soft' bookmakers focus on capturing the largest customer segment of casual players, and fixate less on accurate prices.
+Consequently, the odds at soft bookmakers can temporarily be higher than the true odds implied by Pinnacle, which this software aims to exploit. 
+These opportunities arise when the soft book is slow to adjust their odds compared to the sharps, or when they deliberately leave the prices skewed to 'balance the book'.
+
+
+### Calculating the true odds
+From <a href='https://www.football-data.co.uk/' >football-data.co.uk</a>'s <a href='https://www.football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf'>study</a> (p.15-16) on the correlation between the expected returns (defined by the ratio of odds from
+one of the 4 leading UK bookmakers to Pinnacle's implied true odds) and the actual returns, we can see that there is a strong, near 1:1 correlation. Thus, the theory that Pinnacle's odds can be used to calcalute the true odds has practical significance and 
+will be employed for this purpose.
+
+<p align='center'><img width=60% src='assets/pinnacle accuracy.png'></p>
+
+To obtain the true odds of an event, the margin from Pinnacle's odds is removed using the Margin Proportional to the Odds formula:
 
 $odds_{true}=\frac{n\*odds_{pinnacle}}{n-M\*odds_{pinnacle}}$
 
 Where:
-- $odds_{true}$: true odds of an outcome
+- $odds_{true}$: true odds of the outcome
+- $odds_{pinnacle}$: pinnacle odds of the outcome
 - $n$: number of outcomes
 - $M$: margin
 
@@ -40,6 +57,8 @@ Margin Proportional to the Odds was chosen as it was the simplest of the two mod
 \
 It also yielded profits slightly above the expected yield when used as the model to calculate true odds.
 <p align='center'><img width=60% src='assets/margin_prop_returns.JPG'></p>
+
+All graphs are from <a href='https://www.football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf' >football-data.co.uk</a>.
 
 ## Installation
 1. Clone the repository
@@ -67,9 +86,15 @@ py src/main.py not_tab
 ```
 - Note: `py` is interchangeable with `python` or `python3`
 
+Output:
+```
+[{'name': '<match name>', 'outcome': '<team/draw>', 'odds': <odds>, 'value': <value in decimal>, 'datetime': <datetime object>}, ...] <link>
+```
+
 ### Adding or removing links
 To add a link:
 1. Get links for the league of the sport you want to add
+    - Pinnacle link is necessary but adding just one other bookmaker link will suffice
 	- Must be the URL displaying the odds for the events of the whole league
 		- Examples: <a href='assets/pin.png' >Pinnacle</a> <a href='assets/tab.png' >Tab</a> <a href='assets/sb.png' >Sportsbet</a>
 2. Add to links dictionary in `link_manager.py` in the format:
@@ -81,7 +106,7 @@ To add a link:
 To remove a link, simply remove the key value entry for the league you want to remove from the links dictionary in `link_manager.py`.
 
 ## Credits/Acknowledgments
-Theory based on <a href='https://www.football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf' >Wisdom of the Crowd</a> by <a href='https://www.football-data.co.uk/' >football-data.co.uk</a>. Visit the <a href='https://www.football-data.co.uk/blog/wisdom_of_the_crowd.php' >website article</a>.
+Theory and data from <a href='https://www.football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf' >Wisdom of the Crowd</a> by <a href='https://www.football-data.co.uk/' >football-data.co.uk</a>. Visit the <a href='https://www.football-data.co.uk/blog/wisdom_of_the_crowd.php' >website article</a>.
 
 ## Potential improvements
 ### Multithreading
