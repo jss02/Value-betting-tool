@@ -23,13 +23,13 @@ By not restricting sharp bettors and offering high liquidity, they effectively p
 On the contrary, unlike Pinnacle who rely on high volume to compensate for their low margins as their business model, other bookmakers offer higher margin
 but lazy (less accurate) odds. These 'soft' bookmakers focus on capturing the largest customer segment of casual players, and fixate less on accurate prices.
 Consequently, the odds at soft bookmakers can temporarily be higher than the true odds implied by Pinnacle, which this software aims to exploit. 
-These opportunities arise when the soft book is slow to adjust their odds compared to the sharps, or when they deliberately leave the prices skewed to 'balance the book'.
+These opportunities arise when the soft bookmaker is slow to adjust their odds compared to the sharps, or when they deliberately leave the prices skewed to 'balance the book'.
 
 
 ### Calculating the true odds
 From <a href='https://www.football-data.co.uk/' >football-data.co.uk</a>'s <a href='https://www.football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf#page=15'>study</a> (p.15-16) on the correlation between the expected returns (defined by the ratio of odds from
 one of the 4 leading UK bookmakers to Pinnacle's implied true odds) and the actual returns, we can see that there is a strong, near 1:1 correlation. Thus, the theory that Pinnacle's odds can be used to calcalute the true odds has practical significance and 
-will be employed for this purpose.
+will be utilized for this purpose.
 
 <p align='center'><a href='https://football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf#page=16'><img width=60% src='assets/pinnacle accuracy.png'></a></p>
 
@@ -88,7 +88,7 @@ py src/main.py not_tab
 ```
 - Note: `py` is interchangeable with `python` or `python3`
 
-Output:
+Output (stdout):
 ```
 [{'name': '<match name>', 'outcome': '<team/draw>', 'odds': <odds>, 'value': <value in decimal>, 'datetime': <datetime object>}, ...] <link>
 ```
@@ -108,7 +108,7 @@ To add a link:
 To remove a link, simply remove the key value entry for the league you want to remove from the links dictionary in `link_manager.py`.
 
 ## Credits/Acknowledgments
-Theory and data from <a href='https://www.football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf' >Wisdom of the Crowd</a> by <a href='https://www.football-data.co.uk/' >football-data.co.uk</a>. Visit the <a href='https://www.football-data.co.uk/blog/wisdom_of_the_crowd.php' >website article</a>.
+Theory and data from <a href='https://www.football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf' >Wisdom of the Crowd</a> by <a href='https://www.football-data.co.uk/' >football-data.co.uk</a>.
 
 ## Potential improvements
 ### Multithreading
