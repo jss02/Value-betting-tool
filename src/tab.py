@@ -33,7 +33,7 @@ def get_tab_odds(driver_path, web):
     driver = webdriver.Chrome(service=Service(driver_path), options=driver_options)
 
     # Open URL
-    driver.get(web)
+    driver.get(web())
 
     # Wait until webdriver finds element containing the games
     WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, "customised-template")))

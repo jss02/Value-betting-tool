@@ -42,7 +42,7 @@ def get_pin_odds(driver_path, web):
     driver = webdriver.Chrome(service=Service(driver_path), options=driver_options)
 
     # Open URL
-    driver.get(web)
+    driver.get(web())
 
     # Wait until webdriver finds content block containing the games
     WebDriverWait(driver, 6).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.square")))
