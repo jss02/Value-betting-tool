@@ -1,5 +1,5 @@
 # Value Betting Software
-![Python](https://img.shields.io/badge/python-3.10-blue) ![Release](https://img.shields.io/badge/version-v1.0-clairvoyant) [![License: MIT](https://img.shields.io/github/license/jss02/Value-betting-software?color=yellow)](https://github.com/jss02/Value-betting-software/blob/src/LICENSE.txt)
+![Python](https://img.shields.io/badge/python-3.10-blue) ![Release](https://img.shields.io/github/v/release/jss02/Value-betting-software) [![License](https://img.shields.io/github/license/jss02/Value-betting-software?color=yellow)](https://github.com/jss02/Value-betting-software/blob/main/LICENSE.txt)
 <p align='center'><a href='https://www.pinnacle.com/en/'><img width='150' height='80' src="https://logowik.com/content/uploads/images/pinnacle2317.logowik.com.webp"></a>
 <a href='https://www.sportsbet.com.au/' ><img width='150' height='80' src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Sportsbet_Logo.jpg"></a>
 <a href='https://www.tab.com.au/' ><img width='150' height='80' src="https://logovectorseek.com/wp-content/uploads/2020/04/tab-com-au-logo-vector.png"></a></p>
