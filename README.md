@@ -111,7 +111,7 @@ Theory and data from <a href='https://www.football-data.co.uk/The_Wisdom_of_the_
 
 ## Potential improvements
 ### Multithreading
-Multithreading would make the program faster as multiple websites could be scraped at once. Opening the webdriver sequentially wastes a lot of time at I/O waiting for as chromedriver which is slow to load the websites.
+Multithreading would make the program faster as multiple websites could be scraped at once. Opening the webdriver sequentially wastes a lot of time at I/O waiting for chromedriver which is slow to load the websites.
 
 ### Using betfair odds to calculate true odds
 Pinnacle delays odds by 15 minutes for users that are not logged in. Using Betfair exchange odds through their API (costs £299) would improve the accuracy of the results.
