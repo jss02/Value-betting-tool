@@ -28,7 +28,7 @@ These opportunities arise when the soft bookmaker is slow to adjust their odds c
 
 ### Calculating the true odds
 From <a href='https://www.football-data.co.uk/' >football-data.co.uk</a>'s <a href='https://www.football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf#page=15'>study</a> (p.15-16) on the correlation between the expected returns (defined by the ratio of odds from
-one of the 4 leading UK bookmakers to Pinnacle's implied true odds) and the actual returns, we can see that there is a strong, near 1:1 correlation. Thus, the theory that Pinnacle's odds can be used to calcalute the true odds has practical significance and 
+one of the 4 leading UK bookmakers to Pinnacle's implied true odds) and the actual returns, we can see that there is a strong, near 1:1 correlation. Thus, the theory that Pinnacle's odds can be used to calculate the true odds has practical significance and 
 will be utilized for this purpose.
 
 <p align='center'><a href='https://football-data.co.uk/The_Wisdom_of_the_Crowd_updated.pdf#page=16'><img width=60% src='assets/pinnacle accuracy.png'></a></p>
